@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap.c                                     :+:      :+:    :+:   */
+/*   ft_push_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 09:34:22 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/06 15:06:47 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/08 12:09:48 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_elem	*ft_create(int value)
 	if (new_elem != NULL)
 	{
 		new_elem->value = value;
+		new_elem->place = 0;
 		new_elem->bin = NULL;
 		new_elem->next = NULL;
 	}
@@ -48,7 +49,7 @@ void	ft_insert(t_elem **head, int value)
 		ft_printf("Erreur : création d'élément.\n");
 }
 
-void	move_botlist1_botlist2(t_elem **head_l1, t_elem **head_l2)
+void	ft_push(t_elem **head_l1, t_elem **head_l2)
 {
 	t_elem	*last_l1;
 	t_elem	*last_l2;
@@ -76,24 +77,26 @@ void	move_botlist1_botlist2(t_elem **head_l1, t_elem **head_l2)
 	}
 }
 
-void	ft_printlist(t_elem *head)
+void	ft_free_list(t_elem **head)
 {
 	t_elem	*current;
+	t_elem	*next;
 
-	current = head;
+	current = *head;
 	while (current != NULL)
 	{
-		ft_printf("%d -> ", current->value);
-		current = current->next;
+		next = current->next;
+		free(current);
+		current = next;
 	}
-	ft_printf("NULL\n");
+	*head = NULL;
 }
 
 void	ft_rotate(t_elem **head)
 {
 	t_elem	*last;
 	t_elem	*previous;
-	
+
 	previous = NULL;
 	last = *head;
 	while (last->next != NULL)

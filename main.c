@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 07:34:44 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/06 16:59:36 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/08 15:12:16 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,78 +17,54 @@ int	ft_split_str(int argc, char **argv, t_elem **list_a)
 	int	i;
 
 	i = 1;
-	if (ft_strchr(argv[i], ' ') && argc > 2)
+	if (argc < 2)
+		return (1);
+	if ((ft_strchr(argv[i], ' ') && argc > 2) || ft_strlen(argv[i]) == 0)
 	{
 		ft_printf("error\n");
-		return 1;
+		return (1);
 	}
 	while (i < argc)
 	{
-		ft_atoi_custom(argv[i], list_a);
+		if (ft_atoi_custom(argv[i], list_a))
+		{
+			ft_printf("error\n");
+			return (1);
+		}
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
-int	ft_len_list(t_elem **list_a)
+void	ft_little_sort(t_elem **list_a, int len)
 {
-	t_elem	*last;
-	int		i;
-
-	i = 0;
-	last = *list_a;
-	while (last->next != NULL)
-	{
-		last = last->next;
-		i++;
-	}
-	return (i);
-}
-
-void	*ft_is_double(t_elem **list_a)
-{
-	t_elem	*temp;
 	t_elem	*current;
 
 	current = *list_a;
-	while (current != NULL)
+	if (len == 2 && (current->value > current->next->value))
+		ft_printf("sa\n");
+	else if (len == 3 && (current->value > current->next->value))
 	{
-		temp = current->next;
-		while (temp != NULL)
+		if (current->value > current->next->next->value)
 		{
-			if (current->value == temp->value)
-				return &current->value;
-			temp = temp->next;
+			if (current->next->value > current->next->next->value)
+				ft_printf("ra\nsa\n");
+			else
+				ft_printf("ra\n");
 		}
-		current = current->next;
+		else
+			ft_printf("sa\n");
+	}
+	else if (len == 3 && (current->next->value > current->next->next->value))
+	{
+		if (current->next->next->value < current->value)
+			ft_printf("rra\n");
+		else
+			ft_printf("sa\nra\n");
 	}
 }
 
-void	*ft_is_sorted(t_elem **list_a)
-{
-	t_elem	*current;
-	t_elem *temp;
-	current = *list_a;
-
-	while (current != NULL)
-	{
-		temp = current->next;
-		while (temp != NULL)
-		{
-			if (current->value > temp->value)
-				return &current->value;
-			temp = temp->next;
-		}
-		current = current->next;
-	}
-}
-
-void	ft_little_sort(t_elem **list_a)
-{
-	
-}
-
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_elem	*list_a;
 	t_elem	*list_b;
@@ -96,25 +72,22 @@ int main(int argc, char *argv[])
 
 	list_a = NULL;
 	list_b = NULL;
-	if (argc < 2)
-		return 1;
-	if(ft_split_str(argc, argv, &list_a) == 0)
+	if (ft_split_str(argc, argv, &list_a) == 0)
 	{
 		len = ft_len_list(&list_a);
 		if (ft_is_double(&list_a) != NULL)
 		{
 			ft_printf("error\n");
-			return 1;
+			return (1);
 		}
-		if(ft_is_sorted(&list_a) != NULL)
+		if (ft_is_sorted(&list_a) != NULL)
 		{
-			ft_printf("pas Tier\n");
 			if (len <= 3)
-				ft_little_sort(&list_a);
+				ft_little_sort(&list_a, len);
 			else
-				ft_radix(&list_a, &list_b, len);
+				ft_radix(&list_a, &list_b);
 		}
-		ft_printlist(list_a);
 	}
-	return 0;
+	ft_free_list(&list_a);
+	return (0);
 }
