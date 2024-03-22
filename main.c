@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 07:34:44 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/22 13:56:02 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/22 15:31:36 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,9 @@ int	main(int argc, char *argv[])
 		}
 		if (ft_is_sorted(&list_a) != NULL)
 		{
-			if (len <= 3)
-				ft_little_sort(&list_a, len);
+			ft_simplify(&list_a);
+			if (len <= 5)
+				ft_little_sort(&list_a, list_b);
 			else
 				ft_radix(&list_a, &list_b);
 		}

@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:22:18 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/22 11:07:49 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/22 14:37:37 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct t_elem
 t_elem	*ft_create(long int value);
 void	*ft_is_double(t_elem **list_a);
 int		ft_len_list(t_elem **list_a);
+void	ft_sort_5(t_elem **list_a, t_elem **list_b);
 void	*ft_is_sorted(t_elem **list_a);
 void	ft_free_list(t_elem **head);
 void	ft_push(t_elem **head_l1, t_elem **head_l2);

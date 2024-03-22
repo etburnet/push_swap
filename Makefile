@@ -6,13 +6,13 @@
 #    By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 12:48:48 by eburnet           #+#    #+#              #
-#    Updated: 2024/03/22 14:11:06 by eburnet          ###   ########.fr        #
+#    Updated: 2024/03/22 14:37:23 by eburnet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CFLAGS = -Wall -Wextra -Werror
-SRCS = ft_push_rotate.c ft_utils.c ft_radix.c ft_atoi_custom.c main.c
+SRCS = ft_push_rotate.c ft_lil_sort.c ft_utils.c ft_radix.c ft_atoi_custom.c main.c
 OBJS = $(SRCS:.c=.o)
 HEADERS = push_swap.h
 LIBFT_PATH = ./libft

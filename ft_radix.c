@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:22:12 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/22 13:57:22 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/22 15:29:17 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	ft_radix(t_elem **list_a, t_elem **list_b)
 	int		len_list;
 	int		bin_max;
 	
-	ft_simplify(list_a);
 	ft_d_to_b(list_a);
 	bin_max = ft_bin_max(list_a);
 	len_list = ft_len_list(list_a);
