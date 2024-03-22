@@ -6,13 +6,13 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 09:34:22 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/08 12:09:48 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/22 13:58:05 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_elem	*ft_create(int value)
+t_elem	*ft_create(long int value)
 {
 	t_elem	*new_elem;
 
@@ -27,7 +27,7 @@ t_elem	*ft_create(int value)
 	return (new_elem);
 }
 
-void	ft_insert(t_elem **head, int value)
+void	ft_insert(t_elem **head, long int value)
 {
 	t_elem	*new_elem;
 	t_elem	*current;
@@ -51,29 +51,23 @@ void	ft_insert(t_elem **head, int value)
 
 void	ft_push(t_elem **head_l1, t_elem **head_l2)
 {
-	t_elem	*last_l1;
-	t_elem	*last_l2;
-	t_elem	*previous;
+	t_elem	*first_l1;
+	t_elem	*first_l2;
 
-	previous = NULL;
-	last_l1 = *head_l1;
-	while (last_l1->next != NULL)
+	if (*head_l1 == NULL)
+        return; 
+	first_l1 = *head_l1;
+	*head_l1 = first_l1->next;
+	first_l2 = *head_l2;
+	if (first_l2 == NULL)
 	{
-		previous = last_l1;
-		last_l1 = last_l1->next;
+		*head_l2 = first_l1;
+		first_l1->next = NULL;
 	}
-	if (previous != NULL)
-		previous->next = NULL;
-	else
-		*head_l1 = NULL;
-	if (*head_l2 == NULL)
-		*head_l2 = last_l1;
 	else
 	{
-		last_l2 = *head_l2;
-		while (last_l2->next != NULL)
-			last_l2 = last_l2->next;
-		last_l2->next = last_l1;
+		first_l1->next = first_l2;
+		*head_l2 = first_l1;
 	}
 }
 
@@ -86,6 +80,7 @@ void	ft_free_list(t_elem **head)
 	while (current != NULL)
 	{
 		next = current->next;
+		free(current->bin);
 		free(current);
 		current = next;
 	}
@@ -95,16 +90,15 @@ void	ft_free_list(t_elem **head)
 void	ft_rotate(t_elem **head)
 {
 	t_elem	*last;
-	t_elem	*previous;
+	t_elem	*first;
 
-	previous = NULL;
+	if (*head == NULL || (*head)->next == NULL)
+		return ;
 	last = *head;
+	first = *head;
 	while (last->next != NULL)
-	{
-		previous = last;
 		last = last->next;
-	}
-	previous->next = NULL;
-	last->next = *head;
-	*head = last;
+	last->next = first;
+	*head = first->next;
+	first->next = NULL;
 }

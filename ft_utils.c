@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:41:12 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/08 15:06:21 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/22 10:55:31 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 int	ft_len_list(t_elem **list_a)
 {
-	t_elem	*last;
+	t_elem	*current;
 	int		i;
 
-	i = 0;
-	last = *list_a;
-	if (last->value)
-		i++;
-	while (last->next != NULL)
+	i = 1;
+	current = *list_a;
+	while (current->next != NULL)
 	{
-		last = last->next;
+		current = current->next;
 		i++;
 	}
 	return (i);

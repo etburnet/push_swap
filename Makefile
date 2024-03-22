@@ -6,11 +6,11 @@
 #    By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 12:48:48 by eburnet           #+#    #+#              #
-#    Updated: 2024/03/08 15:20:20 by eburnet          ###   ########.fr        #
+#    Updated: 2024/03/22 14:11:06 by eburnet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap.a
+NAME = push_swap
 CFLAGS = -Wall -Wextra -Werror
 SRCS = ft_push_rotate.c ft_utils.c ft_radix.c ft_atoi_custom.c main.c
 OBJS = $(SRCS:.c=.o)
@@ -22,7 +22,7 @@ LIBFT_PATH = ./libft
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT_PATH)/libft.a
-	ar rc $(NAME) $(OBJS) $(LIBFT_PATH)/libft.a
+	gcc $(CFLAGS) $(OBJS) -L$(LIBFT_PATH) -lft -o $(NAME) -g3
 
 %.o: %.c $(HEADERS)
 	gcc $(CFLAGS) -c $< -o $@
@@ -34,7 +34,8 @@ clean:
 	rm -f $(OBJS)
 	make -C $(LIBFT_PATH) clean
 
-fclean: clean
+fclean:
+	rm -f $(OBJS)
 	rm -f $(NAME)
 	make -C $(LIBFT_PATH) fclean
 
