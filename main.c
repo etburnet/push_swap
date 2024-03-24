@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 07:34:44 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/22 15:31:36 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/24 14:41:15 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,6 @@ int	ft_split_str(int argc, char **argv, t_elem **list_a)
 	return (0);
 }
 
-void	ft_little_sort(t_elem **list_a, int len)
-{
-	t_elem	*current;
-
-	current = *list_a;
-	if (len == 2 && (current->value > current->next->value))
-		ft_printf("sa\n");
-	else if (len == 3 && (current->value > current->next->value))
-	{
-		if (current->value > current->next->next->value)
-		{
-			if (current->next->value > current->next->next->value)
-				ft_printf("ra\nsa\n");
-			else
-				ft_printf("ra\n");
-		}
-		else
-			ft_printf("sa\n");
-	}
-	else if (len == 3 && (current->next->value > current->next->next->value))
-	{
-		if (current->next->next->value < current->value)
-			ft_printf("rra\n");
-		else
-			ft_printf("sa\nra\n");
-	}
-}
-
 int	main(int argc, char *argv[])
 {
 	t_elem	*list_a;
@@ -125,7 +97,7 @@ int	main(int argc, char *argv[])
 		{
 			ft_simplify(&list_a);
 			if (len <= 5)
-				ft_little_sort(&list_a, list_b);
+				ft_lil_sort(&list_a, &list_b, len);
 			else
 				ft_radix(&list_a, &list_b);
 		}

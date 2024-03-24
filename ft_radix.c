@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:22:12 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/22 15:29:17 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/24 16:30:16 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,8 @@ void	ft_radix(t_elem **list_a, t_elem **list_b)
 				ft_push(list_a, list_b);
 				ft_printf("pb\n");
 			}
-			else
-			{
+			else if (current->bin[bin_max] == 1)
 				ft_rotate(list_a);
-				ft_printf("ra\n");
-			}
 			j++;
 			current = *list_a;
 		}
@@ -100,8 +97,6 @@ void	ft_radix(t_elem **list_a, t_elem **list_b)
 			ft_printf("pa\n");
 		}
 		if (ft_is_sorted(list_a) == NULL)
-		{
 			return ;
-		}
 	}
 }

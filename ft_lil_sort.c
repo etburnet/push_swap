@@ -6,120 +6,112 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:32:13 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/22 15:25:03 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/24 16:41:57 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_rr(t_elem **list)
+void	ft_reverse_rotate(t_elem **head)
 {
-	t_elem	*temp;
-	t_elem	*last;
+	t_elem	*av_last;
 
-	if (*list == NULL || (*list)->next == NULL)
+	if (*head == NULL || (*head)->next == NULL)
 		return ;
-	temp = *list;
-	while (temp->next->next != NULL)
-		temp = temp->next;
-	last = temp->next;
-	last->next = *list;
-	*list = last;
-	temp->next = NULL;
-	ft_printf("rr\n");
+	av_last = *head;
+	while (av_last->next->next != NULL)
+		av_last = av_last->next;
+	av_last->next = *head;
+	av_last = NULL;
+	ft_printf("rra\n");
 }
 
-void	ft_sa(t_elem **list)
+void	ft_3_sort(t_elem **list_a)
 {
-	t_elem	*first;
-	t_elem	*second;
-
-	if (*list == NULL || (*list)->next == NULL)
-		return ;
-	first = *list;
-	second = (*list)->next;
-	first->next = second->next;
-	second->next = first;
-	*list = second;
-	ft_printf("sa\n");
-}
-
-void	ft_sort_3(t_elem **list)
-{
-	while (!ft_is_sorted(list))
-	{
-		if ((*list)->place > (*list)->next->place)
-			ft_sa(list);
-		if (!ft_is_sorted(list))
-		{
-			ft_rotate(list);
-			ft_printf("ra\n");
-		}
-	}
-}
-
-int	ft_find_max(t_elem *list)
-{
-	int	max;
-
-	max = list->place;
-	while (list != NULL)
-	{
-		if (list->place > max)
-			max = list->place;
-		list = list->next;
-	}
-	return (max);
-}
-
-int	ft_find_min(t_elem *list)
-{
-	int	min;
-
-	min = list->place;
-	while (list != NULL)
-	{
-		if (list->place < min)
-			min = list->place;
-		list = list->next;
-	}
-	return (min);
-}
-
-void	ft_sort_5(t_elem **list_a, t_elem **list_b)
-{
-	int		max;
 	t_elem	*current;
 
 	current = *list_a;
-	ft_printf("test");
-	if (ft_len_list(list_a) <= 3)
+	if (current->place > current->next->place)
 	{
-		ft_sort_3(list_a);
+		if (current->place > current->next->next->place)
+		{
+			if (current->next->place > current->next->next->place)
+				ft_printf("ra\nsa\n");
+			else
+				ft_printf("ra\n");
+		}
+		else
+			ft_printf("sa\n");
+	}
+	else if (current->next->place > current->next->next->place)
+	{
+		if (current->next->next->place < current->place)
+			ft_printf("rra\n");
+		else
+			ft_printf("sa\nra\n");
+	}
+}
+
+void	ft_4_5_sort(t_elem **list_a, t_elem **list_b, int len)
+{
+	int		i;
+	int		j;
+	t_elem	*current_a;
+	t_elem	*current_b;
+	
+	current_a = *list_a;
+	current_b = *list_b;
+	i = len - 3;
+	while (i > 0)
+	{
+		ft_push(list_a, list_b);
+		ft_printf("pb\n");
+		i--;
+	}
+	ft_3_sort(list_a);
+	while (current_b != NULL) //
+	{
+		while (current_a->place > current_b->place)
+			i++;
+		if (i < 3)
+		{
+			j = i;
+			while (i > 0)
+			{
+				ft_rotate(list_a);
+				ft_printf("ra\n");
+				i--;
+			}
+			ft_push(list_b, list_a);
+			while (j > 0)
+			{
+				ft_reverse_rotate(list_a);
+				j--;
+			}
+		}
+		else
+		{
+			ft_push(list_b, list_a);
+			ft_printf("pa\n");
+			ft_rotate(list_a);
+			ft_printf("ra\n");
+		}
+		current_b = current_b->next;
+	}
+	
+}
+
+void	ft_lil_sort(t_elem **list_a, t_elem **list_b, int len)
+{
+	t_elem	*current;
+
+	current = *list_a;
+	if (len == 2 && (current->place > current->next->place))
+		ft_printf("sa\n");
+	else if (len == 3)
+		ft_3_sort(list_a);
+	else if (len == 4 || len == 5)
+		ft_4_5_sort(list_a, list_b, len);
+	else
 		return ;
-	}
-	max = ft_find_max(*list_a);
-	if (ft_is_sorted(list_a))
-		return ;
-	if (current->place == max)
-	{
-		ft_rotate(list_a);
-		ft_printf("ra\n");
-	}
-	else if (current->next->place == max)
-		ft_rr(list_a);
-	if ((*list_a)->next->place == ft_find_min(*list_a))
-		ft_sa(list_a);
-	ft_push(list_a, list_b);
-	ft_printf("pb\n");
-	ft_sort_3(list_a);
-	ft_push(list_b, list_a);
-	ft_printf("pa\n");
-	if ((*list_a)->place == ft_find_max(*list_a))
-	{
-		ft_rotate(list_a);
-		ft_printf("ra\n");
-	}
-	else if ((*list_a)->next->place == ft_find_max(*list_a))
-		ft_rr(list_a);
 }

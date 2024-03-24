@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 09:34:22 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/22 13:58:05 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/24 16:23:42 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,5 @@ void	ft_rotate(t_elem **head)
 	last->next = first;
 	*head = first->next;
 	first->next = NULL;
+	ft_printf("ra\n");
 }
