@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:41:12 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/22 10:55:31 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/25 16:31:15 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	*ft_is_double(t_elem **list_a)
 		}
 		current = current->next;
 	}
-	return NULL;
+	return (NULL);
 }
 
 void	*ft_is_sorted(t_elem **list_a)
@@ -64,10 +64,26 @@ void	*ft_is_sorted(t_elem **list_a)
 		}
 		current = current->next;
 	}
-	return NULL;
+	return (NULL);
 }
 
-void	ft_printlist(t_elem *head)
+void	ft_free_list(t_elem **head)
+{
+	t_elem	*current;
+	t_elem	*next;
+
+	current = *head;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current->bin);
+		free(current);
+		current = next;
+	}
+	*head = NULL;
+}
+
+void	ft_printlist(t_elem *head) //
 {
 	t_elem	*current;
 
@@ -84,8 +100,8 @@ void	ft_printlist(t_elem *head)
 void	ft_simplify(t_elem **list_a)
 {
 	t_elem	*current;
-	t_elem *temp;
-	int place;
+	t_elem	*temp;
+	int		place;
 
 	current = *list_a;
 	while (current != NULL)
@@ -102,4 +118,3 @@ void	ft_simplify(t_elem **list_a)
 		current = current->next;
 	}
 }
-

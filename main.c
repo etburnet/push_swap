@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 07:34:44 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/24 14:41:15 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/25 16:42:32 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_is_valid_argv(char *argv[])
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 1;
 	while (argv[i] != NULL)
@@ -23,13 +23,14 @@ void	*ft_is_valid_argv(char *argv[])
 		j = 0;
 		while (argv[i][j] != '\0')
 		{
-			if (!ft_isdigit(argv[i][j]) && argv[i][j] != ' ' && argv[i][j] != '-')
+			if (!ft_isdigit(argv[i][j])
+				&& argv[i][j] != ' ' && argv[i][j] != '-')
 				return (&argv[i][j]);
 			j++;
 		}
 		i++;
 	}
-	return NULL;
+	return (NULL);
 }
 
 int	ft_is_int(t_elem **list_a)
@@ -95,7 +96,6 @@ int	main(int argc, char *argv[])
 		}
 		if (ft_is_sorted(&list_a) != NULL)
 		{
-			ft_simplify(&list_a);
 			if (len <= 5)
 				ft_lil_sort(&list_a, &list_b, len);
 			else

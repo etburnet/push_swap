@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:22:12 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/24 16:30:16 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/25 16:43:21 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,33 +64,40 @@ void	ft_d_to_b(t_elem **list_a)
 	}
 }
 
-void	ft_radix(t_elem **list_a, t_elem **list_b)
+void	ft_bin_sort(t_elem **list_a, t_elem **list_b, int *bin_max)
 {
 	t_elem	*current;
-	int		j;
 	int		len_list;
+	int		j;
+
+	current = *list_a;
+	j = 0;
+	(*bin_max)--;
+	len_list = ft_len_list(list_a);
+	while (j < len_list && current != NULL)
+	{
+		if (current->bin[*bin_max] == 0)
+		{
+			ft_push(list_a, list_b);
+			ft_printf("pb\n");
+		}
+		else if (current->bin[*bin_max] == 1)
+			ft_rotate(list_a);
+		j++;
+		current = *list_a;
+	}
+}
+
+void	ft_radix(t_elem **list_a, t_elem **list_b)
+{
 	int		bin_max;
-	
+
+	ft_simplify(list_a);
 	ft_d_to_b(list_a);
 	bin_max = ft_bin_max(list_a);
-	len_list = ft_len_list(list_a);
 	while (bin_max >= 0)
 	{
-		current = *list_a;
-		j = 0;
-		bin_max--;
-		while (j < len_list && current != NULL)
-		{
-			if (current->bin[bin_max] == 0)
-			{
-				ft_push(list_a, list_b);
-				ft_printf("pb\n");
-			}
-			else if (current->bin[bin_max] == 1)
-				ft_rotate(list_a);
-			j++;
-			current = *list_a;
-		}
+		ft_bin_sort(list_a, list_b, &bin_max);
 		while (*list_b != NULL)
 		{
 			ft_push(list_b, list_a);

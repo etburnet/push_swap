@@ -6,15 +6,16 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 09:34:22 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/24 16:23:42 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/25 16:27:25 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_elem	*ft_create(long int value)
+void	ft_insert(t_elem **head, long int value)
 {
 	t_elem	*new_elem;
+	t_elem	*current;
 
 	new_elem = malloc(sizeof(t_elem));
 	if (new_elem != NULL)
@@ -23,18 +24,6 @@ t_elem	*ft_create(long int value)
 		new_elem->place = 0;
 		new_elem->bin = NULL;
 		new_elem->next = NULL;
-	}
-	return (new_elem);
-}
-
-void	ft_insert(t_elem **head, long int value)
-{
-	t_elem	*new_elem;
-	t_elem	*current;
-
-	new_elem = ft_create(value);
-	if (new_elem != NULL)
-	{
 		if (*head == NULL)
 			*head = new_elem;
 		else
@@ -45,8 +34,6 @@ void	ft_insert(t_elem **head, long int value)
 			current->next = new_elem;
 		}
 	}
-	else
-		ft_printf("Erreur : création d'élément.\n");
 }
 
 void	ft_push(t_elem **head_l1, t_elem **head_l2)
@@ -55,7 +42,7 @@ void	ft_push(t_elem **head_l1, t_elem **head_l2)
 	t_elem	*first_l2;
 
 	if (*head_l1 == NULL)
-        return; 
+		return ;
 	first_l1 = *head_l1;
 	*head_l1 = first_l1->next;
 	first_l2 = *head_l2;
@@ -69,22 +56,6 @@ void	ft_push(t_elem **head_l1, t_elem **head_l2)
 		first_l1->next = first_l2;
 		*head_l2 = first_l1;
 	}
-}
-
-void	ft_free_list(t_elem **head)
-{
-	t_elem	*current;
-	t_elem	*next;
-
-	current = *head;
-	while (current != NULL)
-	{
-		next = current->next;
-		free(current->bin);
-		free(current);
-		current = next;
-	}
-	*head = NULL;
 }
 
 void	ft_rotate(t_elem **head)
@@ -102,4 +73,36 @@ void	ft_rotate(t_elem **head)
 	*head = first->next;
 	first->next = NULL;
 	ft_printf("ra\n");
+}
+
+void	ft_reverse_rotate(t_elem **head)
+{
+	t_elem	*first;
+	t_elem	*av_last;
+
+	if (*head == NULL || (*head)->next == NULL)
+		return ;
+	av_last = *head;
+	first = *head;
+	while (av_last->next->next != NULL)
+		av_last = av_last->next;
+	av_last->next->next = first;
+	*head = av_last->next;
+	av_last->next = NULL;
+	ft_printf("rra\n");
+}
+
+void	ft_swap(t_elem **head)
+{
+	t_elem	*first;	
+	t_elem	*second;
+
+	if (*head == NULL || (*head)->next == NULL)
+		return ;
+	first = *head;
+	second = first->next;
+	first->next = second->next;
+	*head = second;
+	second->next = first;
+	ft_printf("sa\n");
 }
