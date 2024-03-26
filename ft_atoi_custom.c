@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:23:33 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/22 11:07:10 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/26 17:21:34 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@ void	ft_atoi_custom(char *str, t_elem **list)
 		result = 0;
 		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 			i++;
-		if (str[i] == '-' || str[i] == '+')
+		if (str[i] == '-')
 		{
-			if (str[i] == '-' )
-				isnegative *= -1;
+			isnegative *= -1;
 			i++;
-		}
+		}	
 		while (ft_isdigit(str[i]))
 			result = result * 10 + (str[i++] - 48);
 		ft_insert(list, result * isnegative);

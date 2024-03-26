@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 09:34:22 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/25 16:27:25 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/26 15:26:58 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_insert(t_elem **head, long int value)
 	}
 }
 
-void	ft_push(t_elem **head_l1, t_elem **head_l2)
+void	ft_push(t_elem **head_l1, t_elem **head_l2, char c)
 {
 	t_elem	*first_l1;
 	t_elem	*first_l2;
@@ -56,6 +56,10 @@ void	ft_push(t_elem **head_l1, t_elem **head_l2)
 		first_l1->next = first_l2;
 		*head_l2 = first_l1;
 	}
+	if (c == 'b')
+		ft_printf("pb\n");
+	else if (c == 'a')
+		ft_printf("pa\n");
 }
 
 void	ft_rotate(t_elem **head)
@@ -92,7 +96,7 @@ void	ft_reverse_rotate(t_elem **head)
 	ft_printf("rra\n");
 }
 
-void	ft_swap(t_elem **head)
+void	ft_swap(t_elem **head, char c)
 {
 	t_elem	*first;	
 	t_elem	*second;
@@ -104,5 +108,8 @@ void	ft_swap(t_elem **head)
 	first->next = second->next;
 	*head = second;
 	second->next = first;
-	ft_printf("sa\n");
+	if (c == 'b')
+		ft_printf("sb\n");
+	else if (c == 'a')
+		ft_printf("sa\n");
 }

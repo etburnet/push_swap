@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 07:34:44 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/25 16:42:32 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/26 17:54:01 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,26 @@ void	*ft_is_valid_argv(char *argv[])
 	return (NULL);
 }
 
+int	check_int(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	if (str[i] == 0)
+		return (1);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (1);
+		i++;
+	}
+	if (str[i] == 0)
+		return (0);
+	return (1);
+}
+
 int	ft_is_int(t_elem **list_a)
 {
 	t_elem		*current;
@@ -42,7 +62,7 @@ int	ft_is_int(t_elem **list_a)
 	{
 		if (current->value > 2147483647 || current->value < -2147483648)
 		{
-			ft_printf("Error");
+			ft_putstr_fd("Error\n", 2);
 			return (1);
 		}
 		current = current->next;
@@ -59,16 +79,18 @@ int	ft_split_str(int argc, char **argv, t_elem **list_a)
 		return (1);
 	if (ft_is_valid_argv(argv) != NULL)
 	{
-		ft_printf("Error");
+		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
 	if (ft_strchr(argv[i], ' ') && argc > 2)
 	{
-		ft_printf("Error");
+		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
 	while (i < argc)
 	{
+		if (check_int(argv[i]))
+			return (ft_putstr_fd("Error\n", 2), 1);
 		ft_atoi_custom(argv[i], list_a);
 		i++;
 	}
@@ -90,7 +112,7 @@ int	main(int argc, char *argv[])
 		len = ft_len_list(&list_a);
 		if (ft_is_double(&list_a) != NULL)
 		{
-			ft_printf("Error");
+			ft_putstr_fd("Error\n", 2);
 			ft_free_list(&list_a);
 			return (1);
 		}

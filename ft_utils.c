@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:41:12 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/25 16:31:15 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/26 17:52:28 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,20 +81,6 @@ void	ft_free_list(t_elem **head)
 		current = next;
 	}
 	*head = NULL;
-}
-
-void	ft_printlist(t_elem *head) //
-{
-	t_elem	*current;
-
-	current = head;
-	while (current != NULL)
-	{
-		ft_printf("Value: %d / ", current->value);
-		ft_printf("place: %d -> ", current->place);
-		current = current->next;
-	}
-	ft_printf("NULL\n");
 }
 
 void	ft_simplify(t_elem **list_a)
