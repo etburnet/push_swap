@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 07:34:44 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/26 17:54:01 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/27 13:50:13 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,19 @@ void	*ft_is_valid_argv(char *argv[])
 		j = 0;
 		while (argv[i][j] != '\0')
 		{
-			if (!ft_isdigit(argv[i][j])
-				&& argv[i][j] != ' ' && argv[i][j] != '-')
+			if (argv[i][j - 1] == '-' && argv[i][j] == '-')
+				return (&argv[i][j]);
+			if ((ft_isdigit(argv[i][j - 1]) && argv[i][j] == '-')
+				|| (!ft_isdigit(argv[i][j + 1]) && argv[i][j] == '-'))
+				return (&argv[i][j]);
+			if (!ft_isdigit(argv[i][j]) && argv[i][j] != ' '
+				&& argv[i][j] != '-')
 				return (&argv[i][j]);
 			j++;
 		}
 		i++;
 	}
 	return (NULL);
-}
-
-int	check_int(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '-')
-		i++;
-	if (str[i] == 0)
-		return (1);
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (1);
-		i++;
-	}
-	if (str[i] == 0)
-		return (0);
-	return (1);
 }
 
 int	ft_is_int(t_elem **list_a)
@@ -77,20 +62,14 @@ int	ft_split_str(int argc, char **argv, t_elem **list_a)
 	i = 1;
 	if (argc < 2 || ft_strlen(argv[i]) == 0)
 		return (1);
-	if (ft_is_valid_argv(argv) != NULL)
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (1);
-	}
-	if (ft_strchr(argv[i], ' ') && argc > 2)
+	if ((ft_is_valid_argv(argv) != NULL)
+		|| (ft_strchr(argv[i], ' ') && argc > 2))
 	{
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
 	while (i < argc)
 	{
-		if (check_int(argv[i]))
-			return (ft_putstr_fd("Error\n", 2), 1);
 		ft_atoi_custom(argv[i], list_a);
 		i++;
 	}
