@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 07:34:44 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/29 14:40:58 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/29 15:02:08 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_is_int(t_elem **list_a)
 int	ft_splitting(char **argv, t_elem **list_a)
 {
 	char	**split;
-	int	i;
+	int		i;
 
 	i = 0;
 	split = ft_split(argv[1], ' ');
