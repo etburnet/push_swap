@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 07:34:44 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/29 15:02:08 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/29 16:13:48 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ int	ft_splitting(char **argv, t_elem **list_a)
 	int		i;
 
 	i = 0;
+	split = NULL;
 	split = ft_split(argv[1], ' ');
+	if (split[0] == NULL)
+		return (1);
 	while (split[i] != NULL)
 	{
 		if (ft_atoi_custom(split[i], list_a))
