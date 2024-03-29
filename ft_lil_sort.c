@@ -6,11 +6,24 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:32:13 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/26 17:15:17 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/29 13:29:20 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
 
 void	ft_rasa_sara(t_elem **list_a, int version)
 {

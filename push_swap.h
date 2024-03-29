@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 09:22:18 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/26 18:05:53 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/29 13:29:30 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	ft_push(t_elem **list_a, t_elem **list_b, char c);
 void	ft_insert(t_elem **head, long int value);
 void	ft_simplify(t_elem **list_a);
 void	ft_rotate(t_elem **head);
-void	ft_atoi_custom(char *str, t_elem **list);
+void	ft_free_tab(char **tab);
+void	*ft_atoi_custom(char *str, t_elem **list);
 void	ft_radix(t_elem **list_a, t_elem **list_b);
 void	ft_reverse_rotate(t_elem **head);
 void	ft_swap(t_elem **head, char c);

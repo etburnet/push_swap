@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 07:34:44 by eburnet           #+#    #+#             */
-/*   Updated: 2024/03/27 13:50:13 by eburnet          ###   ########.fr       */
+/*   Updated: 2024/03/29 14:40:58 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,28 @@ int	ft_is_int(t_elem **list_a)
 	return (0);
 }
 
+int	ft_splitting(char **argv, t_elem **list_a)
+{
+	char	**split;
+	int	i;
+
+	i = 0;
+	split = ft_split(argv[1], ' ');
+	while (split[i] != NULL)
+	{
+		if (ft_atoi_custom(split[i], list_a))
+		{
+			ft_putstr_fd("Error\n", 2);
+			return (1);
+		}
+		i++;
+	}
+	ft_free_tab(split);
+	if (ft_is_int(list_a) == 1)
+		return (1);
+	return (0);
+}
+
 int	ft_split_str(int argc, char **argv, t_elem **list_a)
 {
 	int	i;
@@ -68,9 +90,15 @@ int	ft_split_str(int argc, char **argv, t_elem **list_a)
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
+	if (ft_strchr(argv[1], ' ') && argc == 2)
+		return (ft_splitting(argv, list_a));
 	while (i < argc)
 	{
-		ft_atoi_custom(argv[i], list_a);
+		if (ft_atoi_custom(argv[i], list_a))
+		{
+			ft_putstr_fd("Error\n", 2);
+			return (1);
+		}
 		i++;
 	}
 	if (ft_is_int(list_a) == 1)
